@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-import sys
 import os
+import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from utils import describe_current_room, solve_puzzle, attempt_open_treasure, show_help
-from player_actions import get_input, take_item, move_player, show_inventory, use_item
-from constants import ROOMS
+from constants import COMMANDS, ROOMS
+from player_actions import get_input, move_player, show_inventory, take_item, use_item
+from utils import attempt_open_treasure, describe_current_room, show_help, solve_puzzle
 
 game_state = {
     'player_inventory': [],  # Инвентарь игрока
@@ -18,6 +18,9 @@ game_state = {
 def process_command(game_state, command):
     command = command.lower().strip()
     words = command.split(" ")
+    directions = ['north', 'south', 'east', 'west']
+    if command in directions:
+        move_player(game_state, command)
     match words[0]:
         case "look":
             describe_current_room(game_state)
@@ -38,7 +41,8 @@ def process_command(game_state, command):
         case "inventory":
             show_inventory(game_state)
         case "solve":
-            if 'treasure chest' in ROOMS[game_state['current_room']]['items']:
+            if (game_state['current_room'] == 'treasure_room' 
+                and 'treasure chest' in ROOMS[game_state['current_room']]['items']):
                 attempt_open_treasure(game_state)
             else:
                 solve_puzzle(game_state)
@@ -49,12 +53,12 @@ def process_command(game_state, command):
             print("Вы выходите из игры.")
             return 'exit'
         case _:
-            show_help()
+            show_help(COMMANDS)
 
 def main():
     print("Добро пожаловать в Лабиринт сокровищ!")
     describe_current_room(game_state)
-    while game_state["game_over"] == False:
+    while not game_state["game_over"]:
         command = get_input()
         if process_command(game_state, command) == 'exit':
             game_state["game_over"] = True

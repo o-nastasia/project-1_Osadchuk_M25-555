@@ -1,5 +1,6 @@
 from constants import ROOMS
-from utils import attempt_open_treasure
+from utils import attempt_open_treasure, random_event
+
 
 def show_inventory(game_state):
     if game_state['player_inventory']:
@@ -18,11 +19,20 @@ def move_player(game_state, direction):
     room = game_state['current_room']
     for exit in ROOMS[room]['exits']:
         if direction == exit:
+            next_room = ROOMS[room]['exits'][exit]
+            if next_room == 'treasure_room' and room != 'treasure_room':
+                if 'treasure key' in game_state['player_inventory']:
+                    print("Вы используете найденный ключ, " \
+                    "чтобы открыть путь в комнату сокровищ.")
+                else:
+                    print("Дверь заперта. Нужен ключ, чтобы пройти дальше.")
+                    return
             game_state['current_room'] = ROOMS[room]['exits'][exit]
             room = game_state['current_room']
             game_state['steps_taken'] += 1
             print(room.upper())
             print(ROOMS[room]['description'])
+            random_event(game_state)
             return
     print("Нельзя пойти в этом направлении.")
     return
@@ -34,7 +44,7 @@ def take_item(game_state, item_name):
         if item_name == item:
             ROOMS[room]['items'].remove(item_name)
             game_state['player_inventory'].append(item_name)
-            print("Вы подняли: ", item_name)
+            print("Вы получили: ", item_name)
             return
     print("Такого предмета здесь нет..")
     return
@@ -50,6 +60,8 @@ def use_item(game_state, item_name):
                 if 'rusty key' not in game_state['player_inventory']:
                     game_state['player_inventory'].append('rusty key')
                 print("Вы открыли шкатулку с rusty key")
+            case 'coin':
+                print('Вы чувствуете себя богаче')
             case 'bread':
                 print("Вы чувствуете прилив сил")
             case 'water':
