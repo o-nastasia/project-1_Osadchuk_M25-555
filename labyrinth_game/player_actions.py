@@ -1,4 +1,5 @@
 from constants import ROOMS
+from utils import attempt_open_treasure
 
 def show_inventory(game_state):
     if game_state['player_inventory']:
@@ -46,15 +47,23 @@ def use_item(game_state, item_name):
             case 'sword':
                 print("Вы стали увереннее")
             case 'bronze box':
-                if 'rusty_key' not in game_state['player_inventory']:
-                    game_state['player_inventory'].add('rusty_key')
-                print("Вы открыли шкатулку с rusty_key")
+                if 'rusty key' not in game_state['player_inventory']:
+                    game_state['player_inventory'].append('rusty key')
+                print("Вы открыли шкатулку с rusty key")
             case 'bread':
                 print("Вы чувствуете прилив сил")
             case 'water':
                 print('Вы утолили жажду')
-            case 'silver amulet':
-                print('Вы чувствуете защиту богов')
+            case 'treasure key':
+                if 'treasure chest' in ROOMS[game_state['current_room']]['items']:
+                    attempt_open_treasure(game_state)
+                else:
+                    print("Сундук уже открыт или отсутствует в комнате.")
+            case 'rusty key':
+                if 'treasure chest' in ROOMS[game_state['current_room']]['items']:
+                    attempt_open_treasure(game_state)
+                else:
+                    print("Сундук уже открыт или отсутствует в комнате.")
             case _:
                 print("Вы не знаете, как использовать этот предмет")
     else:
