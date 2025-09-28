@@ -21,6 +21,7 @@ def process_command(game_state, command):
     directions = ['north', 'south', 'east', 'west']
     if command in directions:
         move_player(game_state, command)
+        return
     match words[0]:
         case "look":
             describe_current_room(game_state)

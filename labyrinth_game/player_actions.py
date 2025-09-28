@@ -21,7 +21,7 @@ def move_player(game_state, direction):
         if direction == exit:
             next_room = ROOMS[room]['exits'][exit]
             if next_room == 'treasure_room' and room != 'treasure_room':
-                if 'treasure key' in game_state['player_inventory']:
+                if 'rusty key' in game_state['player_inventory']:
                     print("Вы используете найденный ключ, " \
                     "чтобы открыть путь в комнату сокровищ.")
                 else:
