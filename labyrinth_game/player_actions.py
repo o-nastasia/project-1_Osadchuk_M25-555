@@ -3,12 +3,14 @@ from utils import attempt_open_treasure, random_event
 
 
 def show_inventory(game_state):
+    """Показывает содержимое инвентаря игрока."""
     if game_state['player_inventory']:
         print("Ваш инвентарь: ", game_state['player_inventory'])
     else:
         print("Инвентарь пуст.")
 
 def get_input(prompt="> "):
+    """Получает ввод от игрока."""
     try:
         return input(prompt).strip()
     except (KeyboardInterrupt, EOFError):
@@ -16,6 +18,7 @@ def get_input(prompt="> "):
         return "quit"
 
 def move_player(game_state, direction):
+    """Перемещает игрока в указанном направлении."""
     room = game_state['current_room']
     for exit in ROOMS[room]['exits']:
         if direction == exit:
@@ -38,6 +41,7 @@ def move_player(game_state, direction):
     return
 
 def take_item(game_state, item_name):
+    """Позволяет игроку взять предмет."""
     item_name = item_name.strip()
     room = game_state['current_room']
     for item in ROOMS[room]['items']:
@@ -50,6 +54,7 @@ def take_item(game_state, item_name):
     return
 
 def use_item(game_state, item_name):
+    """Использует предмет из инвентаря."""
     if item_name in game_state['player_inventory']:
         match item_name:
             case 'torch':

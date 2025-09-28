@@ -16,6 +16,7 @@ game_state = {
 }
 
 def process_command(game_state, command):
+    """Обрабатывает введенную команду игрока."""
     command = command.lower().strip()
     words = command.split(" ")
     directions = ['north', 'south', 'east', 'west']
@@ -57,6 +58,7 @@ def process_command(game_state, command):
             show_help(COMMANDS)
 
 def main():
+    """Запускает основной цикл игры."""
     print("Добро пожаловать в Лабиринт сокровищ!")
     describe_current_room(game_state)
     while not game_state["game_over"]:

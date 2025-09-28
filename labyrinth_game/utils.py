@@ -10,6 +10,7 @@ from constants import (
 
 
 def describe_current_room(game_state):
+    """Описывает текущую комнату игрока."""
     room = game_state['current_room']
     print(room.upper())
     print(ROOMS[room]['description'])
@@ -21,6 +22,7 @@ def describe_current_room(game_state):
         print("Кажется, здесь есть загадка (используйте команду solve).")
 
 def solve_puzzle(game_state):
+    """Обрабатывает решение загадки в комнате."""
     room = game_state["current_room"]
     if ROOMS[room]['puzzle']:
         print(ROOMS[room]['puzzle'][0])
@@ -59,6 +61,7 @@ def solve_puzzle(game_state):
 
 
 def attempt_open_treasure(game_state):
+    """Пытается открыть сундук с сокровищами."""
     global GAME_OVER
     room = game_state["current_room"]
     if 'treasure chest' in ROOMS[room]['items']:
@@ -89,16 +92,19 @@ def attempt_open_treasure(game_state):
     
 
 def show_help(COMMANDS):
+    """Выводит список доступных команд."""
     print("\nДоступные команды:")
     for command, description in COMMANDS.items():
         print(f"{command:<16} - {description}")
 
 def pseudo_random(seed, modulo):
+    """Генерирует псевдослучайное число."""
     value = math.sin(seed * 12.9898) * 43758.5453
     fractional_part = value - math.floor(value)
     return int(fractional_part * modulo)
 
 def trigger_trap(game_state):
+    """Активирует ловушку в комнате."""
     print("Ловушка активирована! Пол стал дрожать...")
     if game_state['player_inventory']:
         modulo = len(game_state['player_inventory'])
@@ -114,6 +120,7 @@ def trigger_trap(game_state):
             print("Вы чудом уцелели, но ловушка была близко!")
 
 def random_event(game_state):
+    """Обрабатывает случайное событие в игре."""
     if pseudo_random(game_state['steps_taken'], EVENT_PROBABILITY) == 0:
         event = pseudo_random(game_state['steps_taken'] + 1, EVENT_TYPES_COUNT)
         room = game_state['current_room']
