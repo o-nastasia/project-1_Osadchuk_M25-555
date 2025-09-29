@@ -51,7 +51,7 @@
 
 ## Демонстрация в Asciinema
 
-<script src="https://asciinema.org/a/PoJNGZRBQ0fxbviCWR9eerNtB.js" id="asciicast-PoJNGZRBQ0fxbviCWR9eerNtB" async></script>
+[![asciicast](https://asciinema.org/a/PoJNGZRBQ0fxbviCWR9eerNtB.svg)](https://asciinema.org/a/PoJNGZRBQ0fxbviCWR9eerNtB)
 
 [Смотреть на asciinema.org](https://asciinema.org/a/PoJNGZRBQ0fxbviCWR9eerNtB)
 
