@@ -49,9 +49,11 @@
 3. **Цель игры**: Найти `treasure key` в комнате `crypt` (решив загадку) и использовать его в комнате `treasure_room`, чтобы открыть сундук с сокровищами.
 4. **Осторожно**: В комнате `trap_room` без факела (`torch`) срабатывают ловушки, которые могут привести к потере предметов или завершению игры.
 
-## Демонстрация в asciinema
+## Демонстрация в Asciinema
 
 <script src="https://asciinema.org/a/PoJNGZRBQ0fxbviCWR9eerNtB.js" id="asciicast-PoJNGZRBQ0fxbviCWR9eerNtB" async></script>
+
+[Смотреть на asciinema.org](https://asciinema.org/a/PoJNGZRBQ0fxbviCWR9eerNtB)
 
 ## Пример игрового процесса
 
