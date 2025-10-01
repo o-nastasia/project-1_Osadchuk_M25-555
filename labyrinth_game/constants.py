@@ -22,7 +22,7 @@ ROOMS = {
     'trap_room': {
         'description': 'Комната с плиточной ловушкой. Надпись: "Осторожно".',
         'exits': {'west': 'entrance'},
-        'items': ['rusty key'],
+        'items': ['rusty_key'],
         'puzzle': (
             'Назови слово "шаг" три раза (введи "шаг шаг шаг")',
             'шаг шаг шаг'
@@ -31,7 +31,7 @@ ROOMS = {
     'library': {
         'description': 'Пыльная библиотека. На полках свитки, где-то ключ.',
         'exits': {'east': 'hall', 'north': 'armory'},
-        'items': ['ancient book'],
+        'items': ['ancient_book'],
         'puzzle': (
             'Загадка: "Что растет, когда его едят?" (одно слово)',
             'резонанс'
@@ -40,13 +40,13 @@ ROOMS = {
     'armory': {
         'description': 'Оружейная. Меч на стене, рядом бронзовая шкатулка.',
         'exits': {'south': 'library', 'north': 'crypt'},
-        'items': ['sword', 'bronze box'],
+        'items': ['sword', 'bronze_box'],
         'puzzle': None
     },
     'treasure_room': {
         'description': 'Комната с сундуком. Дверь заперта — нужен ключ.',
         'exits': {'south': 'hall'},
-        'items': ['treasure chest'],
+        'items': ['treasure_chest'],
         'puzzle': (
             'Код двери: число пятикратного шага, 2*5=?',
             '10'
@@ -55,13 +55,13 @@ ROOMS = {
     'dining room': {
         'description': 'Зал с длинным столом. Факелы, еда на столе.',
         'exits': {'west': 'hall'},
-        'items': {'bread', 'water pot'},
+        'items': ['bread', 'water_pot'],
         'puzzle': None
     },
     'crypt': {
         'description': 'Холодная крипта. В центре — саркофаг с рунами.',
         'exits': {'south': 'armory'},
-        'items': ['treasure key'],
+        'items': ['treasure_key'],
         'puzzle': (
             'Руны: "Противоположность света". Ответ — одно слово.',
             'тьма'

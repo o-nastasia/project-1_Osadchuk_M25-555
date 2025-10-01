@@ -38,15 +38,15 @@ def solve_puzzle(game_state):
             if answer in correct_answers[room]:
                 print("Вы угадали!")
                 if room == 'crypt':
-                    if 'treasure key' not in game_state['player_inventory']:
-                        ROOMS[room]['items'].remove('treasure key')
-                        game_state['player_inventory'].append('treasure key')
-                        print('Вы получили награду - treasure key')
+                    if 'treasure_key' not in game_state['player_inventory']:
+                        ROOMS[room]['items'].remove('treasure_key')
+                        game_state['player_inventory'].append('treasure_key')
+                        print('Вы получили награду - treasure_key')
                 elif room == 'trap_room':
-                    if 'rusty key' not in game_state['player_inventory']:
-                        ROOMS[room]['items'].remove('rusty key')
-                        game_state['player_inventory'].append('rusty key')
-                        print('Вы получили награду - rusty key')
+                    if 'rusty_key' not in game_state['player_inventory']:
+                        ROOMS[room]['items'].remove('rusty_key')
+                        game_state['player_inventory'].append('rusty_key')
+                        print('Вы получили награду - rusty_key')
                 ROOMS[room]['puzzle'] = None
                 return answer
             else:
@@ -62,12 +62,11 @@ def solve_puzzle(game_state):
 
 def attempt_open_treasure(game_state):
     """Пытается открыть сундук с сокровищами."""
-    global GAME_OVER
     room = game_state["current_room"]
-    if 'treasure chest' in ROOMS[room]['items']:
-        if 'treasure key' in game_state['player_inventory']:
+    if 'treasure_chest' in ROOMS[room]['items']:
+        if 'treasure_key' in game_state['player_inventory']:
             print("Вы применяете ключ, и замок щёлкает. Сундук открыт!")
-            ROOMS[room]['items'].remove('treasure chest')
+            ROOMS[room]['items'].remove('treasure_chest')
             print("В сундуке сокровище! Вы победили!")
             game_state["game_over"] = True
         else:
@@ -77,7 +76,7 @@ def attempt_open_treasure(game_state):
                 code = solve_puzzle(game_state)
                 if code == right_answer:
                     print("Вы применяете ключ, и замок щёлкает. Сундук открыт!")
-                    ROOMS[room]['items'].remove('treasure chest')
+                    ROOMS[room]['items'].remove('treasure_chest')
                     print("В сундуке сокровище! Вы победили!")
                     game_state["game_over"] = True
                 else:

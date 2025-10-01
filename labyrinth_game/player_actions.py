@@ -24,7 +24,7 @@ def move_player(game_state, direction):
         if direction == exit:
             next_room = ROOMS[room]['exits'][exit]
             if next_room == 'treasure_room' and room != 'treasure_room':
-                if 'rusty key' in game_state['player_inventory']:
+                if 'rusty_key' in game_state['player_inventory']:
                     print("Вы используете найденный ключ, " \
                     "чтобы открыть путь в комнату сокровищ.")
                 else:
@@ -46,6 +46,9 @@ def take_item(game_state, item_name):
     room = game_state['current_room']
     for item in ROOMS[room]['items']:
         if item_name == item:
+            if item_name == "treasure_chest":
+                print("Вы не можете поднять сундук, он слишком тяжелый")
+                return
             ROOMS[room]['items'].remove(item_name)
             game_state['player_inventory'].append(item_name)
             print("Вы получили: ", item_name)
@@ -61,23 +64,23 @@ def use_item(game_state, item_name):
                 print("Стало светлее")
             case 'sword':
                 print("Вы стали увереннее")
-            case 'bronze box':
-                if 'rusty key' not in game_state['player_inventory']:
-                    game_state['player_inventory'].append('rusty key')
-                print("Вы открыли шкатулку с rusty key")
+            case 'bronze_box':
+                if 'rusty_key' not in game_state['player_inventory']:
+                    game_state['player_inventory'].append('rusty_key')
+                print("Вы открыли шкатулку с rusty_key")
             case 'coin':
                 print('Вы чувствуете себя богаче')
             case 'bread':
                 print("Вы чувствуете прилив сил")
-            case 'water':
+            case 'water_pot':
                 print('Вы утолили жажду')
-            case 'treasure key':
-                if 'treasure chest' in ROOMS[game_state['current_room']]['items']:
+            case 'treasure_key':
+                if 'treasure_chest' in ROOMS[game_state['current_room']]['items']:
                     attempt_open_treasure(game_state)
                 else:
                     print("Сундук уже открыт или отсутствует в комнате.")
-            case 'rusty key':
-                if 'treasure chest' in ROOMS[game_state['current_room']]['items']:
+            case 'rusty_key':
+                if 'treasure_chest' in ROOMS[game_state['current_room']]['items']:
                     attempt_open_treasure(game_state)
                 else:
                     print("Сундук уже открыт или отсутствует в комнате.")
